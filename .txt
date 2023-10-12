@@ -1,0 +1,44 @@
+Django rest Frame work is a powerfull and flexible toolkit for building webApi 
+
+
+-  the web browser api is a huge usability win for your developers
+- authentication policies including packages for Oauth1 and Oauth2 
+- Seariazation that suport both ORM and non-Orm data sourses 
+- Customizable all the way down - just use regular function-based views if you dont -t need the more powerful feature . 
+- extensive documentation and great community support 
+- used and trusted by internationally recognized companies including mozilla redhat heroku and Eventbrite 
+
+requirement : - 
+
+- python 
+- django 
+- django-rest-framework 
+- pyYaml uritemplate 5.1+ , 3.0.0 - Schema generation support 
+- markdown support for browsable api 
+pygments add syntax higlight to Markdown processing.
+- dajngo-filter = filterning support
+
+
+# before learning  drf some concwpt you have to know 
+
+# python Json  : - 
+
+ package : - provide by python built in module to working with json 
+
+   - learn two package 
+      
+      import Json 
+      
+      dump(data) - this is used to python dict into json string 
+
+      loads(data) - this help to change json obj to python dict 
+
+ex: 
+
+data = {"name" : "ritik" , id : 12 }
+json_data = dump(data)
+print(json_data) = {"" name "" : "" ritik "" , ""no"" : 12 }  json data can have double quoted 
+
+#same as vice vers using loads 
+
+

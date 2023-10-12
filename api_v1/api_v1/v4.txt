@@ -1,0 +1,86 @@
+# first follow this app deserialize crud  
+
+ validation : in api field 
+
+ three way : - 
+
+   - field level validation 
+   - onjects level validation 
+   - validators 
+
+
+: - field level validation - specify custom field level meditation by adding validate_fieldName method to your serialize subclass.
+    this is similar to the clean fieldName method in django form 
+
+    - validate_fieldName methods should return the validated value or raise a serializes.ValidationError
+
+    syntax : - 
+
+    field_name - roll or name or city 
+
+     def validate_fieldName(self , value):
+          if value > = 200 :
+          raise serialize.ValidationError("seat Full ")
+          return value 
+
+
+
+
+: - object  level ValidationL : -  
+
+  When we need to do validate that require access to multiple fields we do object level validation by adding a method called validate() to serializer subclass.
+
+  It raised our serializers .valetation RR if necessary or just return the validate values
+
+  syntax : - 
+
+    def validate(self , data):
+        # where data is a dict of field values .
+
+        nm = data.get('name')
+        roll = data.get('roll')
+        city  = data.get('city')
+
+        if nm.length <= 8:
+            raise serializes.ValidationError("please give me a valid nam more than 8 char ")
+        if roll ==100:
+           raise serialize.ValidationError(" this is block by school")
+        if city == "tamil":
+            raise serialize.ValidationError(" no need more tamil people ")
+
+
+
+: - validators 
+
+
+  most of the time you are dealing with meditation in rest framework you will simply be relying on the default field validation or writing explicitly validation method on the silicon or field classes.
+
+  However sometimes you will want to place your validation logic into reusable components so that it can easily be reused throughout your code base this can be achieved by using validation function and validator classes.
+
+------
+
+
+Fresh framework validation is performed entirely on the civiliser class this is advantageous for the following reason:
+
+
+   - It introduced a proper separation of concern making new code behavior more obvious. 
+
+   - it is easy to switch between using shortcut model serializer classes and using explicit classes any validation behavior being used for model serializer is simple to replicate.
+
+
+   - printing  the repr() offer serializer instance will show you exactly what validation rules it supply there are no extra hidden validation behavior being called on the model instance.
+
+
+
+   sntax : - 
+
+
+    def starts_with_r(value):
+         if value['0'].lower() != "r":
+              raise serialize.ValidationError(" r name is not allowed  ")
+
+
+              after making this function give in validators=[starts_with_r] in where we give min max validators 
+
+
+              charfiel(max=12 , validators=[starts_with_r])

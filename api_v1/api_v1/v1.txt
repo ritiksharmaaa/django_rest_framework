@@ -1,0 +1,114 @@
+pattern of learning : app - deserailizer - crud  - field_validation
+
+
+# Seariazation 
+
+
+ In Jango Rash framework serializer are responsible for converting complex data such as query set and model instance to native python data type called serializer that can then be used rendered into Json xml or other content type which is understandable by front end.
+
+ Serializer are also responsible for D serializer which means it allows parts data to be converted back into complex type after first validating the incoming data.
+
+ What's the way to do serialization : - 
+
+  a serialization class is very similar to Django form ModelForm class and includes similar validation flag on the various field such as required max_length and default .
+
+  Drf provider a serializer class which give you a powerfull generic way to control the output of your response .as well asa modelserializer class which provide a useful shotcuts for creating that deal with model instance and querysets.
+
+
+
+How ro create a serializer class : - 
+
+- Creating a separate serializer pie file to write or serializers.
+
+
+From rest _framework imports Serializer
+
+class StudentSerializer(serializer.Serializer):
+     name = serializer.charField(max_length=100)
+     roll = serializer.integerField()
+     city  = serializer.charField(max_length=100)
+
+
+we have a make a model as we normally made : - 
+
+  make a model same as serialzer 
+
+
+  run make migration 
+
+
+we want to convert model data to json same as vice versa 
+
+how it happen usauaall each row is an object 
+
+so we convert -> complex data - serializer - > python native datetype - render intoJson --> json Date
+
+
+Serialization ; - 
+
+ The process of converting complex data such as query set and model instance to net python data type are called a serialization in Drf .
+
+ - creating model instance .
+
+   stu = Student.objects.get(id=1)
+
+- converting model instance stu to python Dict / serializer Object 
+
+   serialize = StudentSerializer(stu)  ----> first step 
+
+
+
+--------------- how do with querset data ----------
+
+creating queryset : 
+  stu student.object.all()
+
+converting querysetto list of python dict / serialization querset 
+
+serializedat = StudentSerializer(stu , many=True)
+
+
+
+-----------------------want to see what have in serializer -----------------do this ----------
+
+   serializer.data 
+
+   this is the serialize data .
+
+
+   ------------------json renderer ---------------
+
+ - this is used to render serialized data into Json which is understandable by front end.
+
+ importing JsonRenderer 
+
+ from rest_framework.renderers import JSONRenderer 
+
+
+ Render the data into Json 
+
+ json_data = JSONRenderer().render(serialize.data)
+
+----------------shotcuts ---------for do that same things --------
+
+
+----------JsonResponse()-----------
+
+jsonResponse(data , encode=DjangoJsonEncode , safe=True , json_dumps_params=None . **kwargs)
+
+an HttpResponse Subclass that help to create a Jason - encoded response it inherit most behavior from its superclass with a couple different.
+
+  - its default context-type header is set to application/json 
+
+  - the first parameter data should be a dict instance . if the safe parameter is set parameter is set to False .  it can be any Json-Searializabke object . 
+
+  - the ecoder which default to django core.serialize.json.DjangoJsonEncode will be used to serialize the data 
+
+  - the safe booolean parameter default to True . if it set to true any object can be passed for searialization (otherwise only dict instace are allowed ) , if safe is it True and a non-dict-object is passed as the first argument a . TypeError will be raised . 
+
+
+the json_dumps_params parameter is ad dict of keyword arg to pass to the json.dumps() call used to generate the response . 
+
+
+
+

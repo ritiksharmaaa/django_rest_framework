@@ -1,0 +1,91 @@
+# deserialize data 
+
+
+Serializer are also responsible for d- serialization which means its allow parts data to be converted back into complex type after first validating the incoming data.
+
+working patter : - 
+
+fist json cam --> it convert to python native data type --> decrializer convert our python native code into complex type .
+
+
+we have to learn  some packages before d-serialzer : - 
+
+
+  -- byte io 
+
+    - A stream implementation using an in - memory bites buffer it inherit BufferOBase . The buffer is discarded when the close method is called() 
+
+     - use : - 
+
+        stream = io.BytesIO(json_data) / this help to extract data from which send in url when get and post methods run 
+
+
+-- JSONParser() 
+   
+   - This is used to pass Jason data to python native data type.
+  
+
+    -use : - 
+
+      from rest_framework import JSONParser
+
+      parsed_data = JSONParser().parse(stream)
+
+
+
+-- D-serialization : - 
+
+  - D-  serialization allow parse  data to be converted back into complex type after first validating the incoming data.
+
+  -- first create serialzer object :
+
+       serialzer = StudentSerializer(data=parsed_data)
+
+      - validating data 
+
+        serialization.is_valid()
+
+        if it valid it send data in serialzer.validated_data
+
+        if error came it will give in serialzer.errors
+
+    serialzer.validated_data : - this is the valid data 
+
+
+
+
+
+# creating data / insertData 
+
+
+1 - import rest_framework
+2 - create_serlizer class 
+3 - create method inside serialization class 
+ 
+   def create(self , validate_data ):
+       return Student.objects.create(**validate_data) also import student model 
+
+
+
+when use d-serialization : - 
+
+ insert 
+ update 
+ delete
+
+ 
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+

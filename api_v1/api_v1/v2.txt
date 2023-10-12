@@ -1,0 +1,89 @@
+# in this file we learn how to work with searilax=zer fields . 
+
+serializer fields handel converting between primitive values and internal data types they also deal with validating input value as well as retrieving and setting the value from their parent object.
+
+syntax : - 
+
+from rest_framework import serializer 
+
+var = sarialozer.Field_name()
+
+
+field name : - 
+
+charfield : some inside field [ max len min len allow_balnk : true : false ] trim_whitespace 
+
+integerField = [max min val ]
+
+decimal field = [max min digit decimal_palecs , coerce_to_string=None ]
+
+float field = [max min val localizer  ]
+
+slugField - [max min len allow_balnk=False ]
+
+emailFiedl = [max min len aloww blank 
+
+boolean fieeld = []
+
+null boolean field = []
+url_field = [max min len allow_baln=False ]
+
+fileField = [ max_len aloww_empty=False use_url = UPLOADED_FILE_URL_URL]
+
+dateField = [formate_api=setting.Date_formate , input_formal+none]
+
+duration field = []
+
+regexfield = []
+
+uuidField = [dormate='hex_verbose']
+
+filepathField = []
+
+ipaddrss field = []
+choice fields = []
+
+multiple choice field  = []
+
+list firl = []
+
+dict field = []
+
+Hstore field = []
+
+json field = []
+
+readonly field = []
+
+hidden field = []
+modelFiedl = []
+serialzemethod field = []
+
+
+
+
+
+----------------------------Core Argument ---------------------------------
+
+label = 
+
+validator = 
+
+error_message = 
+
+help_text = 
+
+require = 
+intial = 
+styile = 
+
+readonly = 
+ write_only = 
+
+ allow_null 
+
+ sourse = 
+ 
+
+
+

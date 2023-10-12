@@ -1,0 +1,30 @@
+# we already see  how to get and post data now we see how to update paritaial as well as fully update !
+
+#crud api function based view : - 
+
+   make serializer 
+
+   - create methods create(self , validate_data):return models.create(**validate_data)
+   
+
+
+   - update ---- paritial as well as fully 
+
+     
+     def update(self , instance , validate_data):
+          instance.name = validate_data.get('name' , instance.name) # instance.data is previous data 
+          instance.roll = validate_data.get('roll' , instance.roll)
+          instance.city = validate_data.get('city' , instance.city)
+          instance.save()
+          return instance 
+
+
+-complete update data : - 
+
+ by default serializer must be passed values for all required field or they will raise validation error 
+
+ Require all data from frontend /client 
+
+ serializer = StudentSerializer(stu , data=pythondata) # for partial = add partial=true
+ if serializer.is_valid():
+     serializer.save()
