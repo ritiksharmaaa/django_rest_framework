@@ -1,0 +1,45 @@
+# model serializer : - 
+
+
+
+modelsserializer  Class provided shortcut that let  automatically create a silhouette class with Fields Dat corresponding to the model fields.
+
+The models serilizer  class is the same as regular s serializer class expect that
+
+
+ it will automatically generate a set of fields for you based on the model
+ 
+ it will  automatically generate validator for the sea largest such as unique _together  validators .
+
+ Eight include simple default implementation of create()  and update()
+
+
+
+ create model serilzer class : - 
+ 
+
+ from rest_framework import serializer 
+
+ class StudentSerializer(serializer.ModelSerializer):
+      class Meta:
+          model = Student 
+          fields = ''__all__' or [individuall targetted ] or exclude = ['roll']
+
+          def validator_rool(self , value):
+              if value >= 8:
+                  raise serializers.ValidationError("Seat Full ")
+
+
+
+
+
+validator in model serializer : -
+
+
+same as check uppper code 
+
+
+
+
+
+

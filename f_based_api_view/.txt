@@ -1,0 +1,128 @@
+# function based Api view : - 
+
+  # this view help to reduce code . to not doing json to python or extract data to json . it can do very few line of code . 
+
+
+#----------------
+
+this wrapper provide a few bits of functionality such as making sure you receive request instance in your view and adding contacts to response objects so that contest negotiation can be performed.
+
+The rapper also provide behavior such as returning 405 method not allow response when appropriate and handling any parserErroor exceptions that occur when accessing requests dot data with malformed input.
+
+by default api-View = Only get method will be accepted other method will response with 405 method not allowed.
+
+If you want other than the get method you have to explicitly write it to use that method.
+
+syntax : - 
+
+@api_view() - bu default it a get methods .
+
+
+  @api_view(['GET' , 'POST' , 'PUT' , 'PATCH' , 'DELETE'])
+
+
+
+working ----------------------------------
+
+
+import rest_framework.decorator import api_view 
+from rest_framework.response import Response 
+from rest_framework import status 
+
+
+@api_view()
+def student_list(request):
+    if request.method == 'GET':
+        stu = Student.objects.all()
+        serilizer  = StudentSerializer(stu , many=True)
+        return Response(serilizer.data )
+        
+@api_view(["POST"])
+def post_data(request):
+    id request.method == "POST":
+        serilizer = StudentSerializer(data=request.data)
+        if serilizer.is_valid():
+            serilizer.save()
+            msg = {
+            'msg' : "data created"
+             }
+            return Response(msg , status=HTTP_201_CREATED)
+        return Response(serilizer.erros , status=status.HTTP_400_bad_REQUEST)
+
+@api_view(["put"])
+for post or put 
+
+
+
+# method -- 
+
+ get , post , put , patch , DELETE  - we can use generally etc ...
+
+
+ #request ------------
+
+
+ rest framework request object to white flexible request parsing that allows you to treat request with Jason data or other media type in the same way that you would normally deal with form data.
+
+ ex . if fm is valid than request.post.get(name , many more same as in Request )
+
+ request.data - Request dot data return the past content of the request body this is similar to the standard request dot post and request dot files attribute except that . 
+
+
+   - it include all parsed content including file and non file inputs: - 
+
+   - Eight support passing the content of HTTP method other than post meaning that you can access the content of put and patch request.
+
+
+
+8 support rest framers flexible  request  Passing rather than just supporting firm data for example you can handle incoming Jason Dat in the same way that you handle incoming form data.
+
+
+Request : - 
+
+request.method - request.method Return the upper case string representation of the representation as TTP method.
+
+browser based footpath and delete forms are transparently supported.
+
+
+request.query_params - Request dot query and score forum is a more correct namesynonym for request.Get 
+
+4 clarity inside your code we recommend using request dot query _forums instead of the Django Standard request dot gat doing so will help keep your code base more correct and obvious ttp method any type may include query parameters not just get requests.
+
+
+Response : - 
+
+ Test framework support HTTP content negotiation by providing a response class which allow you to return content that can be rendered into multiple content type depending on the client request.
+
+ Text Ambabi in response object are initially initialized with data which should consist of native python primitive rash framework then use standard as TTP content negotiation to determine how it should render the final response content.
+
+
+
+
+
+Response class simply provide R Nisar interface for returning content - negotiation web api request that can be rendered to multiple format.
+
+
+
+syntax : - 
+
+ return Response(data , status=None , template_name=None , header_none , content_type=None)
+
+ inside data : - The unrendered serialized data 4 response.
+
+ status : the status code for the response default two two hundred 
+
+ template_name = the template name to use only if HTML rendered or some other custom template rendered is the accept rendered for the response.
+
+ header : - A dictionary of http headers to use in the response.
+
+ content_type : - The content type of the response typically this will be a set of automatically by the rendered as determined by content negotiation but there may be some places where you need to specify the content type explicitly.
+
+ 
+
+
+
+
+
+
+    

@@ -1,0 +1,45 @@
+# class based api view . 
+
+
+
+
+dajngo rest framework provide an api view class which subclass DjangoView class . 
+
+Api view are diffrent from regular view classes in the following ways .
+
+ - Request passed to the handler methods will be rest framework request instance not django Http Request instances .
+
+ - handle method may return rest framework requests response instead of dajngo Http response the view will manage content negotiation and setting the current on the response.
+
+ - any api exception will be caught and mediated into appropriate responses .
+
+ - incomming requests will be authenticated and appropriated permisiion and/or throttle check will be run before dispatch the request tot he handler method .
+
+
+
+ working : - 
+
+ import rest_framework.views import APIView 
+
+
+
+class Student(APIView):
+     def get(self , request , pk=None  formate=None):
+         stu = Student.objects.all()
+         serializer = StudentSerializer(stu , many=True)
+         return Response(request.data)
+    def post(self , request , formate=None)
+        serializer = StudentSerializer(request.data)
+        if serializer.is_valid():
+            serializer.save()
+            msg = {
+                "msg" : "data save " , 
+               
+             }
+
+             return Response(msg , status : status=status.HTTP_400_BAD_REQUEST )
+    
+
+    # same as we  make for all put patch delete as well .
+
+
