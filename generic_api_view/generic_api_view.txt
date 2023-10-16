@@ -1,0 +1,163 @@
+# generic based api views and mixins : - 
+
+ this classs exrends rest framework APIVIEw class adding commonly required behaiviour for standard list and detail views .
+
+ attribute : - 
+
+  queryset - The queryset  should be used for returning object from the view typically you must either set the attribute or override the get_query() methods .  if you are overriding a view method it is important that you call get _query() set instead of accessing the property directly as query set will get evaluate once and those result will cache for all subsequent request.
+
+serializer_class - The serializer class that should be used for validating and digitalising input and forceralising output typically you must either set these attribute or override the get _serialize _class()  methods
+
+lookup_field - The model failed at should be used for performing object lookup of individual model instance default to PK.
+
+lookup_url_kwargs - The URL keyword argument that should be used for object lookup the URL confer shouldn't include a keyword argument corresponding to the value if unset this default to using the same value as Luka lookup_field
+
+paginated_class seee in furture vidio . 
+
+filters_backends - A list of filter classes that should be used for filtering the queries at default to the same value as the DEFAULT _FILTER _BACKENDS settings.
+
+
+
+
+
+methods : - 
+
+get_queryset(self):  -  it returned the queries that should be used for list view and that should be used as the base for lookup in detail view default to returning the query set to specify the queries set attribute.
+
+
+  - The method should always be used rather than accessing self dot query set directly as self dot query set get evaluate only once and those results are cached for all subsequent request.
+
+
+get_object(self) :  - Return an object instant that should be used for detailed view default to using the lookup _field parameter to filter the base query set.
+
+get_serializer_class(self) - it returned The class that should be used for the civilization defaults to returning the Silagar _class attribute
+
+
+
+get_serializer_context - editor and dictionary containing any extra contacts that should be supplied to serializer default to recruit request view and format keys.
+
+get_paginated_response(self , data) : -he return a paigeonette style response object
+
+filter_queryset(self , queryset): - Given a quarry shirt filter it will whichever filter back ends are in use returning on new querieset .
+
+Mostly method are automatically initialized and some of you have to initialize it to use it.
+
+
+
+------------------Mixins  ------------ is not use in productiob as much . 
+
+whatever you learn after this concept those is made by mixins.
+
+-mixin ---- 
+
+One of the big pin of using class based view is that its allow you to easily compose reusable bits  of behavior
+
+- The create updates delete operation that we have been using so far are going to be pretty similar for any model backend api view we create.
+
+
+- Those bits of common behavior are implemented in rest framework mixing classes.
+
+- The mixing classes provide the action that are used to provide the basic view behavior.
+
+- Note That the mixing classes provide action method rather than defining the handle methods such as get() and post() , Directly these allow for more flexible compositions of behavior.
+
+
+
+working :- 
+
+import form rest_framework.mixin 
+
+
+tyoe of mixin : - 
+
+  ListModelMixin
+  CreateModelMixin
+  RetrievieModelMixin
+  UpdateModelMixin
+  DestroModelMixin
+
+
+ListModelMixin(request , *args , **kwargs ) : -  Method that implements listing a query set.
+
+
+   - If the query set is populated this return are 200 K okay response with a serializer representation of a query set as the body of the response the response data may many optional will pagonated .
+
+working :- 
+
+ from rst_frasmework.mixins import ListModelMixin
+ from rest_frameowork.generic import GenericAPIView .
+
+
+
+ demo :- 
+
+ class StudentLsit(ListModelMixin , GenericAPIView):
+     queryset = Student.objects.all()
+     serializer_class = StudntSerializer
+     def get(self ,request , *args , **kwargs):
+         return self.list(request , *args , **kwargs)
+
+
+createModelmixins(request , args ,kwargs ) : - Method implement creating and saving a new model instance.
+
+If an object is created the return are 201 created response with a serializer representation of an object as the body of a response if the representation contain a key name URL then the location header of the response will be populated with that value.
+
+if the request data provided for creating the object was invalid 400 bad request response will be returned will the error detail as the body of the response.
+
+work : - 
+
+class createStudent(createModelmixins , GenericAPIView):
+     queryset = Student.object.all()
+     serializer_class = StudntSerializer
+
+     def post (self , request , arg , kwargs):
+         return self.create(request , args , kwargs )
+
+
+
+#RetrievieModelMixin( request , args , kwarg) : - It provide a retrievemethod that implement returning an existing model instance in a response.
+
+If an object can be retrieved this return of 200 ok response with a serialized representation of the object as the body of the response otherwise it will return a 404 not found.
+
+
+
+# UpdateModelMixin (req , args m kwargs ): - Method at implement updating and saving an existing model instance.
+
+  It also provides a partial _update( request arcs keyword arcs) method which is similar to the update method expect that all fields for the update will be optional this allows support for http patch request . 
+
+
+ - If an object is updated this return of 200 or a response with a serializer presentation of the object as the body of the response.
+
+
+ - If the request data provides for updating the object was installed 400 bat requests response will be returned with error detail as the body of response.
+
+ work : - 
+
+ class updateStudetn(UpdateModelMixin ,GenericAPIView ):
+      queries = Student.Objects.all()
+      serializer_class = StudentSerilaize 
+      def put(self , request , args kwarg ):
+      return self.update(request , args , **kwargs )
+
+
+
+#distroy(request , args , kwarg): - Method at implement deletion of an existing model instance.
+
+cladd delStudent(DestroModelMixin , GenericAPIView):
+
+     querieset = Stuident.object.all()
+     serialized_class = StudentSerilaize
+
+
+     def  delete(self , request , *args , kwarg ):
+          return self.destroy(request , args , kwarg )
+
+
+
+you can write all the method inside one class bu inhertance multiple model mixin
+  
+
+
+
+
+

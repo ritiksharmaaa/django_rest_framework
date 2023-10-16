@@ -1,0 +1,62 @@
+# concreate view class : it a method to define form in upper class and define defination in inherted class to use reusablity of code .
+
+-  the following classes are the concrete generic view. -----------------------------------------
+
+- If you are using generic view this is normally the level you will be working on unless you need heavy customization behavior.
+
+ views classes imported from rest_framework.generic
+
+ ListAPIView , CreateAPIView , ReteriveAPIView , UpdateApiView , DestroyAPIView 
+
+
+ also combination view are lso availabel : - 
+
+ ListCreateAPIView , 
+ ReteriveUpdateAPIView , 
+ RetriveDestropAPIView , 
+ RetriveUpdateAPIView ,
+
+ ListAPIView : - It is used for ready only and point to represent a collection of model instance its provider get method handler .
+
+ extends : - GenericAPIView , ListModelMixin .
+
+ work : - 
+
+  class StudentList(ListAPIView):
+    queryset = Student.objects.all()
+    serilize_class = StudenSerilizer 
+      done 
+
+
+
+# CreateAPIView : - It used four create only and pointed provider post method and 
+
+extends generic API or create model mixin.
+
+work 
+
+same as upper code 
+
+# UpdateApiView - it is used for update only and point for a single model itself is to white put and patch method handler.
+
+extends : - GenericAPIView , UpdateApiView 
+
+
+#DestroyAPIView : - It is used for delete only and .4 single model instance is provided delete method handler.
+
+extends : - GenericAPIView , DestroyAPIView 
+
+ same as upper code : - queryset or serilize_class . 
+
+
+ #ReteriveUpdateAPIView : - It is used for read or update and point to represent a single model instance it provides get put and batch method handler.
+
+ extends : - GenericAPIView ,RetriveModelMixin , UpdateModelMixin . 
+
+ same as upper code 
+
+ samea s for all other combination views . 
+
+
+make a url accoding to this apiview . 
+
