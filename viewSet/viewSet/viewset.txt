@@ -1,0 +1,80 @@
+# view set in drf : - 
+
+  djengo Rash framework allow you to combine the logic for a set of related view in a simple class called a view set.
+
+there are two main advantage of using a viewset over using a views  class.
+
+-  Reapeated logic be combine into single class .
+
+- by passing routers we no longer need with wiring up the url conf ourselves . 
+
+
+
+
+viewset Class : - 
+
+in this viewset we just write three line an crud will happen .
+
+I am the color of yousect class is simple a type of class based view that does not provide any method handler such as get()  or post()  and insect provide action such as list() and create().
+
+list() get all date 
+
+roterive() - get single data 
+
+create() - for create data 
+
+update() - for update data
+
+partial_upddate() - for partial update data .
+
+
+work ----------- 
+
+import from rest_framework import viewsets .
+
+class StudentSet(viewsset.ViewSet):
+    deflist(self , request ):.......
+    def create(self , request ):.....
+    def retrive(self , request , pk=None):...
+    def update(self , request , pk=None):...
+    def partial_update(self , request , pk=None):....
+    def distroy(self , request , pk=None):......
+
+
+
+: - During dispatch the following attribute are available on the view set.
+
+basename - The pace to use for the URL named data created.
+
+action - the name of the current action (eg , list , create )
+
+detail - Bullion indicating if the current action is configured for a list or detail view.
+
+suffix - The display suffix for the view set - mirrors the detail attribute.
+
+name - the display name for the view set the argument is mutually exclusive to suffix
+
+description - The display description for the individual view of a view set.
+
+
+
+router config not as  normal url view call : ----------------
+
+
+URL confg : - 
+
+import include - for add 
+import your view with application 
+from rest_framework.routers import DefaultRouter 
+
+object create 
+
+router = DefaultRouter() 
+router.register('studentapi' , model views of viewset , basename="student")
+
+
+in url patter 
+
+path(""  /include(router.urls)),
+
+

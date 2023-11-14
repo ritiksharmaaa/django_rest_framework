@@ -1,0 +1,36 @@
+# custom authentication : - 
+
+
+
+to implement a custom authetnication scheme , subclass baseAuthentication and override the authenticate(self , request) method . the method should return a two-tuple of (user , auth ) if authetnication succeeds or None otherwise . 
+
+
+make a customauth.py 
+
+on that file -------------------
+
+
+from rest_framework.authentication import BaseAuthentication 
+from django.contrib.auth.model import User 
+from rest_framework.exceptions import AuthenticationFailed
+
+
+class CustomAuthintication(BaseAuthentication):
+     def authentication(self , request):
+     username = request.GET.get('username')
+     if username is None : 
+         return home 
+    try : 
+    user = User.objects.get(username=username)
+    except User.DoesNotExists:
+       raise AuthenticationFailed('No Such User')
+    return (user , None )
+
+
+    give this class in authetnication where we write tocken authincation .
+
+
+
+# so you have to give only username to authenticate because we make our auhtcation like that .
+
+    

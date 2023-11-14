@@ -1,0 +1,149 @@
+# token authentication : - 
+
+this auth schema uses a simple tocken-based Http auth schema . token auth is apporpriate is appropriate for client -server setup such as native desktop and mobile client .
+
+to use the tokenauth scheme you ill need to configure the authentication classes to include tockenauth and additionaly include rest_framework.authtoken in your Install__APP setting .
+
+INSTALL_APPS = [
+    'rest_framework.authtoken'
+
+]
+
+
+make sure to run manage.py migrations after change your settings. the  rest_framework.authtocken app provide django database migrations .
+
+
+this applicattion provide  table to use tocken authentication .
+
+
+------------------------------------------- Tocken authenticated 
+
+if successfully authenticated , TokenAuthentication provide the following credential , 
+
+
+request.auth will be a django user instance . 
+
+request.auth will be a rest_framework.authtoken.models.Tocken instance 
+
+
+Unauthticated response that are denied permission will result in an Http 401 
+Unauthticated response with an unappropriate  WWW-Authincate-header  for example: - 
+
+   WWW-Authincate: Token 
+
+   the http command line tool mab be usefull for testing tocken auth Api for example .
+
+
+
+http http : //127.0.0.1:8000/studentapi/'Authorizatikon':Token
+you see httpie , curl 
+
+Note : If yo use tocken Authentication in Production you must ensure that your API is only availabel over Https .
+
+you use tocken authentication when you have token .
+
+
+
+----------generate  token --------
+
+using Admin Application .
+
+Using Django manage.py Command .
+
+    python manage.py drf_create_token username this return API Token for the given user or Create a token if token does't exists for user.
+
+    his command work two : - if tocken already have it return that token .
+
+    and if not it create tocken for user .
+
+
+by exposing an Api endpoint . 
+
+Using Signals 
+
+
+
+-------------------------how client ask to create Token -----
+
+
+When using token authentication you may want to provide a mechanism for client to obtain a token given the user name and password.
+
+Rest framework provide a built in view to provide the behavior to use it at the obtain _token view to your url config.
+
+from rest_framework.views import obtain_auth_token 
+
+urlpatterns = [
+    path('gettoken' ,  obtain_auth_token)
+]
+
+
+
+The obtain _auth _token view will return a Jason response when valid username and password field are posted to the view using from data or Json.
+
+we use httpie for request url 
+
+http post http://127.0.0.1:8000 /gettoken/username="name" password="pass"
+
+if your user name and pass is valid it return a tocken 
+
+it return as wee ll as create . 
+
+
+you can also modiefued this response get some customize responose like if you want email and many more things .
+
+you can also get user id 
+
+
+
+-----------------------------------customize token response 
+
+
+create an extra file  call auth.py -----------
+
+
+
+seee int the file : - auth .py 
+
+
+---------------generate tocken with diffrent diffrent diffrent methods  --------------------
+
+
+sing Admin pannel 
+using Ajngo manage.py command 
+     python manage.py drf_create_tocken username 
+by exposing an API endpoint . 
+
+we can also generate token via Signals : - 
+
+
+-------------------using signals 
+
+in models file we create you can create here you want 
+
+from djanfo.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import reciever 
+from rest_framework.authtoken.models import Token 
+
+@reciever(post_save , sender= settings.AUTH_USER_MODEL)
+def create_auth_token(sender , instance=None , created=False , **kwargs):
+    if created :
+    Token.objects.create(user=instance)
+
+
+httpi ===========
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

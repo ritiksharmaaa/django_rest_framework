@@ -1,0 +1,75 @@
+# session authentication : - 
+
+best framework provider number of authentication schemes out of the box and also allow you to implement custom schems .
+
+SessionAuthentication : - the authentication scheme Yuvu Django defaults session backend for authenticated session authenticated is appropriate for Ajax client that are running in the same session context as your website.
+
+A successfully authenticated Sachin Authentication provides the following credential requires that user will be a Django user instance and request dot auth is none .
+
+unauthenticated response data deny permission will be resolved in HTTP 403 forbidden response . 
+
+
+
+
+If you using an Ajax style api with session authentication you will need to make sure you include a valid csrf token for any unsafe http method calls such as put patch post or delete request.
+
+
+
+Permission : - same as basic authentication . 
+
+
+allowAny 
+isadminUser 
+isAuthenticationOrReadOnly 
+DajngoModelPermission 
+DjangoModelPermisionOr/AnonReadOnly 
+DajngoObjectPermission 
+custom Permission 
+
+
+
+isAdminUser: - 
+
+
+ The is admin user permission class will deny permission to any user unlessuser.is _staff is true in which case permission will be allowed the permission is suitable if you want your api to only be accessible to be a subset of trusted administration.
+
+ isAuthenticationOrReadOnly : - 
+
+  The is authenticate or read only will allow authenticate user to perform any request for unauthorized user will only be permitted if the request method is one of the safe method get head or option . 
+
+  The permission is suitable if you want it to your API to allow read permission to anonymous user and only allow raid permission to authenticate users.
+
+
+
+  Django_model Permission : - 
+
+  The permission classes tie into Janko Standardjango Contribute Auth model permission these permission must only be applied to view that have a queriesiteproperty set authorizations will only be granted if the user is authenticated and has the relevant model permission assigned.
+
+
+
+- POST Request require the user to have the add perm on the model . 
+
+- put patch : - Request required to user to have the change permission on the model.
+
+delete : - Request require all the user to have the delete permission on the model.
+
+The default behavior can also be override to support custom model permission for example you might want to include a view model permission for get request.
+
+To use custom model permission override Django Model Permission and set the perms _map property = 
+
+
+
+
+Django Object Permission : - 
+ 
+
+ perMission class tie into Jaguar Standard object permissions framework that allow per object permission on models in order to use the permission classes you will also need to add permission backend that support object level permissions such as Jango-Guardian
+
+
+you nedd add dajngo object level  permission backend in you setting .py file .As with Jango Model Permission these permission must only be applied to view that have a quarry set property or get _queries set method authorization will or need be granted at the user is authenticated and has the relevant per object permission and relevant model permission assigned.
+
+
+
+
+
+

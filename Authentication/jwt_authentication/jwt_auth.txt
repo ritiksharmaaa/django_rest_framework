@@ -1,0 +1,157 @@
+# jwt authentication (json web token )
+
+index of authentication 
+ 
+- basic auth ,
+-  session auth ,
+-  tokenauth , 
+ - remoteauth(see later not impo)(insted of this we use third party authentication  DJANGO OAUTH TOKEN , JSON WEB TOCKEN authentication ) ,
+
+   SOME MORE : -  hawk http auth , http signature auth , djoser , dajngo-rest-auth , django-rest-framework-social-oauth2 
+   django-rest-knox , drfpasswordless . 
+- custom auth ,
+-
+
+
+
+
+-------------------json web token ------------ 
+
+Jason Web token is a fairly new standard which can be used for token based authentication unlike the built in token authentication schema JWT authentication does not need to use a database to validate a token.
+
+for more go to ---------------jwt.io-------- site 
+
+you have lot of package inside jwt but we see basic in this and explore many more . 
+
+------------------simple jwt ----------- 
+
+
+simple JWT provide a Jason Web token authentication packet for the Jango Rash framework its aim to cover the most common use case of JWT by offering a conservative set of default feature it also aims to be easily extensively in case a desired feature is not present.
+
+for more chekc this site : - http://djano-rest-framework-simplejwt.readthedocs.io/en/latest/
+
+it a third party so you have to install it first before use . 
+
+pip install django-rest-framework-simplejwt 
+
+
+--------------------------------------cinfigure jwrt --------------------------
+
+implement globally ------------
+
+REST_FRAMEOWRK = {
+    'DEFAULT_AUTHENTICATION_CLASSES' : (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+
+    )
+}
+
+url.py ---------------------------------
+
+from drf-s-jwt import TokenObtainPairView   , TokenRefreshView
+
+[
+path('token/' , TokenObtainPairView.as_view() , name="tokenobtainview")
+path('refreshtoken/' , TokenRefreshView.as_view()  , name="refress token view ")]
+
+first you create tocken than refress tocken and verfiy it . -------------------------------
+
+
+
+if verfing token add extra : --------------------------
+
+
+You can also include a route for simple jwt token verify view if you wish to allow api user to verify hmac signed token without having access to your signing key.
+
+
+in url py . 
+
+it is basd on user feature if want give that alse leave it . 
+
+from drf-s-jwt import TokenObtainPairView   , TokenRefreshView , TokenVerfyView .
+
+
+
+
+----------------------jwt defualt setting -------------------------
+
+in setting.py file . ------------
+
+
+
+from datetime import timedelta 
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME' : timedelta(minutes=5),   # this tell whatever token is gererate it validity is only for 5 minutes.
+    'REFRESS_TOKEN_LIFETIME' : timedelta(day=1), # mean it give user to get newtocken without username and pass by giving a extra token to generte newtocken .
+    'ROTATE_REFRESS_TOKEN' : false , # it tell server not to give two tocken onky give new access token . 
+
+    'bLACKLIST_AFTER_ROTATION' : TRUE ,
+    'ALGROTHIM' : HS256 
+    SIGNING_KEY : SETTING.SECRET_KEY ,
+
+    VARIFING_KEY : NONE ,
+    AUDIENCE : NONE ,
+    ISSUER : NONE ,
+    AUTH_HEADER_TYPE , 
+    USER_ID_FIELD : 'id ,
+    USER_IS_CLAIM : 'user_id'
+
+
+    'AUTH-TOKEN-CLASSES': (rest_framework_simplejwt.AccessToken),
+    'TOKEN-TYPE-CLAIM' : ''tocken_type' ,
+    JTI_CLAIM  : 'jti',
+    SLIDING_TOKEN_EXP_CLAIM : 'refress_exp' 
+     SLIDING_TOKEN_LIFETIME : timedelta(minutes=5)
+    SLIDING_TOKEN_LIFETIME : timedelta(day=1)
+
+
+
+
+
+    EXPLAIN : ---------------------------------------
+
+
+    ACCESS_TOKEN_LIFETIME - a daytime.timedelta objects which specifies how lomg they acces  tocken is valid .    }
+
+    REFRESS_TOKEN_LIFETIME :' A daytime delta object participates how long refresh token are valid.
+
+
+
+    HOW TO USE : - 
+
+
+    get token : we use http pie because can not access token via browable api . 
+
+    http post http://127.0.0.1:8000/gettoken/ username="user" password="password"
+
+
+
+    verfy token : --- 
+
+
+    http post http://127.0.0.1:8000/verfytoken/ token="tocken which you reacieve." 
+
+
+    refress token : --------------
+
+    this tocken is get when we intial create token . so with this tocken we create help to create next five minus acces token 
+
+    http post http://127.0.0.1:8000/refreshtoken/ refresh="refress tocken"
+
+
+
+    all the prmission class work as uasullay it work .
+
+
+
+
+
+
+how request for get something : - 
+
+
+http http://127.0.0.1:8000/studentapi/ 'AUTHORIZATION : Bearer  PASETE TOKEN HERE '
+
+
+

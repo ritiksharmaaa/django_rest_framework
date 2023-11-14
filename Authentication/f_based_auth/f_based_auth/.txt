@@ -1,0 +1,17 @@
+# function based auththincate 
+
+what we have tot we have to import a decorator  from where we import apivew 
+authenticted_classes , permission_classes .
+
+
+
+
+@api_view([get post put patch])
+@authenticted_classes([BasicAythentication])
+@permission_classes([IsAuthentication])
+def studetn_view(request , pk=None):
+     if reg mehd get 
+
+
+that it not more than this 
+        

@@ -1,0 +1,25 @@
+#  model view set : - 
+
+  Model views at laws inherit from January kpi view and include implementation for various action by mixing eta behavior of various mixing classes.
+
+ The action provided by the model usage classes are list retrieved create update partial update and destroy you can use any of the standard attribute or method overwrite provided by generic kpi view.
+
+ work : - 
+
+
+ class StudentViewset(viewsets.ModelViewSet):
+     queryset = Student.objects.all()
+     serializez_class = StudentSerialize 
+
+
+
+     thats it you just add as normal route . work well 
+
+
+
+
+# readonly only model view set 
+
+They read only model view set classes also inherited from generic kpi view as with the model used it also includes implementation for various action but unlike model views at Omni provide the read only action list and retrieve you can use any of the standard attribute and method override available to generic kpi view.
+
+same as upper code .

@@ -1,0 +1,127 @@
+Throttling is similar to permission in that it determines if a request should be authorized throttle indicate a temporary state and are used to control the rate of request that client can make to an api.
+
+your api might have a restrictive throttle for an authenticate request and a less restrictive throttle for authenticated request.
+
+
+
+THROTLING : - 
+
+The default throttling policy may be set globally using the 
+[
+default _throttle _class and default _throttle _rates] in capitals lettter 
+
+in glbaly : - 
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_CLASSES :[
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle',
+    ]
+}
+
+DEFAULT_THROTTLE_RATES : {
+    'anon' : '100/day',
+    'user' : 1000/day'
+}
+
+
+AnonRateThrottle --------------
+
+
+The anon rate throttles will only ever throttle an authenticated user the IP address of the incoming request it used to generate a unique key to throttle against.
+
+the allow request rate is determined from one of the following in order of preference.
+
+The rate property on the class which may be provided by Uber riding an on rate throttles and setting the property.
+
+
+
+the DEFAULT_THROTTLE_RATES['anon] setting 
+
+AnonRateThrittle Age suitable if you wanted to restrict the rate of request from unknown source.
+
+
+
+UserRateThrottle ---------------------:
+
+The user rate total will throttle user to give a rate of request across the api the user id is used to generate a unique key to throttle against an authenticated request will fall back to using the ip address of the incoming request to generate a unique key to total against.
+
+The allow request rate is determined from one of the following in order of preference.
+
+
+The rate property on the class which may be provided by overriding user rate total and setting up property.
+
+the DEFAULT_THROTTLE_RATES['anon] setting 
+
+
+ScopedRateThrottle : 
+
+It helps to restrict some part of the api which not normal user can access . (my means )
+
+Descoped rate throttle class can be used to restrict access to specific part of the EPI will only be applied if the view that is being accessed include a throttle scope property the unique throttle keywill then be formed by concatenating the scope of the request with the unique user id or ip address.
+
+
+
+work 
+
+
+from rest_framework.thrrottling import AnonRateThrittle , UserRateThrottle 
+
+
+class StudentApiViewSet(viewset.Modelviewset0):
+    quereset = student.objects.all()
+    serializer = stiddentserialozer 
+    authenticate_class = [sessionauthentication]
+    paermisiion_class = [isautheniticateorReadonly]
+    throttle_class = [AnonRateThrittle , UserRateThrottle , ScopedRateThrottle ]
+
+
+you can Also give throttle setting in below the code or in new file s. 
+
+
+
+we create athrootle file.py 
+ from rest_framework.throttling import UserRateThrottle , AnonRateThrottle
+
+ class JsacScope_throtle (UserRateThrottle):
+ scope = 'Jack' 
+
+
+ this can use where we give throttle class in model 
+
+
+
+
+ in setting .pu file : 
+
+
+ REST_FRAMEWORK = {
+    ''DEFAULT_THROTTLE_RATES: {
+        'anon' : '2/day',
+        'user' : 5/hour,
+        'jack' : 3/minutes
+    } }
+
+
+
+first import to modelviewset 
+
+set throttle_class = [ , jack_throtle
+]
+
+
+
+----------------------in throttle you can set throttle in diifrent diffrent part like  create delete update her using genric api view . 
+
+
+hoe it work let see : = 
+
+
+class StudentPI(VIEWSET.modelviewset):
+    queryset = model.objes.all()
+    serializer_class = model_serializer 
+    throttle_class = [ScopedRateThrottle]
+    scope = "delete model"   so we restric the model throttling in same a jack we use .
+
+    

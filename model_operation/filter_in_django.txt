@@ -1,0 +1,2 @@
+the simple way to to filter the queryset of any queryset of any view that subclasses Genericapiview is to overriden the get_querset() method. 
+

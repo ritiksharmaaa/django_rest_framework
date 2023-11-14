@@ -1,0 +1,92 @@
+why we use auth and perm : - 
+
+Currently our api does not have any restriction on who can edit or delete data we would like to have some more advanced behavior in order to make sure that.
+
+ - Data is always associated with our creator
+ - Only authenticated user may create Data
+ - Only the creator of a data may update or delete it
+ - Unauthenticated requires should have full read only access.
+
+
+
+ Authentication : - 
+
+Authentication is the mechanism of associating an incoming request with a set of identifying credentials such as the user the request came from or the token that is assigned with the permission and throtting  policy can then use those credentials to determine if the request should be permitted.
+
+Authentication is always run at the very start of the view before the permission and throttling check occur and before any other code is allowed to proceed.
+
+Rush framework provide a number of authentication schemes out of the box and also allow you to implement custom schemes .
+
+- Basic Authentication 
+- Session Authentication 
+- Token Authentication
+- RemoteUserAuthention 
+- Custom Authentication
+
+
+
+ Basic Authentication : - 
+  
+
+  the authentication schema use HTTP basic authentication sign against a username and password.
+
+  - Basic  authentication is journey only appropriate for testing.
+  - If successfully authenticated basic authentication provides the follow Prudential.
+
+  request.user willl be dajngo instance 
+  request.auth will eb None 
+
+An authenticated response that are deny permission will result as an HTTP 401 unauthorized response will be appropriate WWW dot iphone authenticate header four examples.
+
+
+
+Note : - If you use besie authentication in production you must ensure that your API is only available over HTTPS.
+
+You should also ensure that your API client will always read requests the username and password at login and will never store those details to persistent storage.
+
+one time learn perm and work same in all .
+
+
+Perminsssion : - 
+
+Permissions are used to grant or deny access to different classes of user to different part of the api.
+
+permissions check are always run at the very start of the view before any other code is allowed to proceed.
+
+Permissions check will typically use the authentication information in the request user and request all property to determine if the incoming request should be permitted.
+
+
+Perminsssion Classes : - 
+
+permission in rest framework are always defined as a list of permission classes.
+
+- Allow Any 
+- isAuthenticated 
+- IsAdminUser 
+- Is AuthenticatedOrReadOnly 
+- DjangoModelPermission
+- DjangoModelPermissionOrAnonReadOnly
+- DjangoObjectPermissions 
+- custom Perminsssion
+
+
+Allow Any : - 
+
+ Do you allow any permission class will allow unrestricted access regarding of if the request was authenticated or unauthenticated.
+
+ The permission is not strictly required since you can achieve the same result by using an empty list or tuple for the permission setting but you may find it useful to specify this class because its make the intention explicitly.
+
+ isAuthenticated: - 
+
+   - the is authenticated permission class built deny permission to any authenticated user and allow permission otherwise.
+     these permission is suitable if you want your api to only be accessible to registered users.
+    
+IsAdminUser : - 
+
+  The is admin user permission class will deny permission to any user unless user dot is _staff is true in which case permission will be allowed.
+
+  This permission is suitable if you want your api to only be accessible to a subset of trusted administration.
+
+
+
+
