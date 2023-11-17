@@ -1,0 +1,50 @@
+# limit offset pagination . 
+
+These pagination style mirror da Syntax used when looking up multiple database record dark lines include both a limit and an offset query parameter the limit india the maximum number of item to return and it equivalent to the page _size in other style the offset indicate the starting position of the query in the relations tothe complete set of unpaginated items.
+
+
+mean in m y term : - limit mean 4 data get after 6 here 6 is offset=6   just like sub string vs substr .
+
+
+
+to enable the limit offset pagination style globally use the following configuration: - 
+
+REST_FRAMEWORK={
+    DEFAULT_PAGINATION_CLASS   :  'rest_framework.pagination.LimitOffsetPagination' 
+}
+
+how to call: - 
+
+ https : //127.0.0.1:8000/studentapi/?limit=4&offset=6
+
+
+
+LimitOffsetPagination: -----------
+
+Check designation class include a number of attributes that may be override to modify the paginated style. same as pagenumberpagination 
+
+
+overide to set attribute . 
+
+
+default limit : - A numerical value indicated that limit to use if one is not provided by the client in a query parameter default to same value as the page _size capital setting key
+
+limit_query_param : - A string value indicated the name of the limit query parameter default to limit
+
+offset_query_param : - A string value indicated the name of the offset query parameter default to offset.
+
+max_limit : - If set this is a numeric value indicating the maximum allowable limit that may be requested by the client default to none.
+
+template - the name of a template to use when rendering pagination control in the browsable api may be overridden to modify the rendering style or set to none to disable html paging nation control completely default to rest_framework/pagination/numbers.html'.
+
+
+
+
+do it : - 
+
+  class Customeoffsetpagination(LimitOffsetPagination):
+      default_limit = 5
+      limit_query_param = "mylimit"
+      offset_query_param = "myoffset"
+      max_limit = 6 
+        

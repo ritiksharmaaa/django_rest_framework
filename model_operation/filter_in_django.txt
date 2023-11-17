@@ -1,2 +1,101 @@
 the simple way to to filter the queryset of any queryset of any view that subclasses Genericapiview is to overriden the get_querset() method. 
 
+
+
+ist way -------
+
+from django.shortcuts import render
+from .serializer import Student_Serializer 
+from .models import Student_data
+
+from rest_framework.generics import ListAPIView 
+
+class StudentListApi(ListAPIView):
+    queryset = Student_data.objects.get(filter there it work )
+    serializer_class = Student_Serializer
+
+
+
+getting data based on user base .------------------------------------------------- 
+
+like user.email . user.pass. user.articles 
+
+so overright the get_querset() modiefied .
+
+
+class StudentListApi(ListAPIView):
+    queryset = Student_data.objects.all()
+    # queryset = Student_data.objects.filter(passby="2023")
+    serializer_class = Student_Serializer
+
+    def get_queryset(self):
+        user = self.request.user 
+        return Student_data.objects.filter(user=user)
+    
+
+
+    USED IN WHEN ECOMMERCE HAVE MULTIPLE SELLER NEED TO SHOW DATA BASED ON SELLER ACCOUNT 
+
+-------------------------------------------------------------GENERIC FILTERING --------------------------
+
+rest framework also includes supports four generic filtering packets that allow you to easily construct complex search and filter.
+
+
+django_FILTERBASCKEND ------
+
+Django filter library include a jango filter packing class with support highly customizable field filtering for rest framework.
+
+pip install django-filter ----
+
+install applicaion in seeting py file . 
+
+for more use : ----- https://django-filter.readthedocs.io/en/lates/index.html
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS;:
+    ['django_filter_framework.DjangoFilterBackend']
+    }
+
+
+--------------per view setting ------------
+
+
+You can set the filter back end on a per view or per view set basic using the generic api view class based view.
+
+From Django _fielder filter.rest _framework in Port Django filter DjangoFilterBackend
+
+class StudentListApi(ListApiView()):
+    queryset = Student_data.objects.all()
+    serializer_class = serializer_class 
+    filter_backends = [django_FilterBackend]
+
+
+
+django_FILTERBASCKEND -- 
+
+if all you need is simple equality based filtering you can set a------- filterset_fields ----------- attribute on the view or views at listing the set of fields you wish to filter against. 
+
+class StudentListApi(ListApiView()):
+    queryset = Student_data.objects.all()
+    serializer_class = serializer_class 
+    filter_backends = [django_FilterBackend]
+    filterset_fields = ['name' , 'city']
+
+
+    after making this yiu have to send data in api url like that 
+
+
+    https://127.0.0.1:8000/Studentapi/?name=sonam&city=ranchi so it can work efficietly .
+
+    
+
+
+
+
+
+
+
+
+
+

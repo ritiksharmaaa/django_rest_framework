@@ -1,5 +1,5 @@
 """
-URL configuration for model_operation project.
+URL configuration for serialization_relation project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -15,8 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path , include
+from django.urls import path , include 
+from api import views 
+from rest_framework.routers import DefaultRouter
+
+
+router = DefaultRouter()
+
+router.register('singer' , views.SingerViewSet, basename="singer")
+router.register('song' , views.SongViewSet, basename="song")
+router.register('song_singer' , views.Song_SingerViewSet, basename="song-singer")
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("filtering.urls")),
+    path('', include(router.urls)),
 ]

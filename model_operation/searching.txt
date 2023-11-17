@@ -1,0 +1,47 @@
+# searching in api using django filter backend . 
+
+the search filter class supports simple single query parameter based searching and is based on the Django admin search  functionality.
+
+The search filter class will only be applied if the view has a search field attribute set the e search _fields attribute should be a list of names of tax type fields on the model such as Carefield or text field.
+
+
+----------------------
+
+from rest_framework.filter import SearchFilter 
+
+class Student_Serializer(ListView):
+    queryset = objetc.all()
+    serializer_class = serializer_class
+    filter_backends = [SearchFilter]
+    search_fields = ['city']
+
+
+
+https://127.0.0.1:8000/studentapi/?search=Ranchi
+
+
+
+
+also "-------------------
+
+'^'Starts-with search 
+'=' Exact-text search 
+'@' full-text-search, (currently only support Django PostgressSQL backend )
+'$' Regex search 
+
+
+example : - 
+""
+search_fields = [^name"]
+search_fields = [@name"]
+search_fields = [=name"]
+search_fields = [$name"]
+
+
+in api search=query ---------we want to change to search to our custom name . 
+
+in setting py file : 
+
+REST_FRAMEWORK={
+    'SEARCH_PARM' : search | by default we can change it .}
+

@@ -1,0 +1,12 @@
+
+#  hyper linked modelserializer it give you api as url like  : -----------------
+
+
+# Give you a list of your old aldi product or images or maybe whatever you want to store it give you a link and that link whenever you click it the link give you the particular data detail view
+
+class Singer_Song(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Singer 
+        fields = ['id'  , 'url' ,'name' , 'gender' ,]
+
+# repr is used to ckeck what happen inside a function code .

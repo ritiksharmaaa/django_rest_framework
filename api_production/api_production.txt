@@ -1,0 +1,5 @@
+disablebrowsable api 
+
+Rest_FRAMEWORK = {
+    'DEFAULT_RENDERED_CLASSES' : {'rest_framework.renderers.JsonRenderer'}
+}

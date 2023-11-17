@@ -1,0 +1,17 @@
+use when you want to get the whole array with data in singer api so we use nested serializer 
+
+
+
+class SongSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Song 
+        fields = [ 'id' , 'title' , 'singer' ,  'duration']
+    
+
+class SingerSerializer (serializers.ModelSerializer):
+sungby = SongSerializer(many-true , read_only=true)
+    class Meta: 
+        model = Singer 
+        fields = [ 'id' , 'name' , 'gender' , 'song',  "sungby"]
+
+

@@ -1,0 +1,86 @@
+# pagination in django rest framework .
+
+Best framework includes support for customizable pagination style these allow you to modify how large results sets are split into individual pages of data.
+
+we read three topic : - 
+
+1 - pagintionNumberPagination 
+
+2 - limitOffsetPagination. 
+
+3 - CursorPagination 
+
+-----pagination in global settings .------------------ 
+
+The pagination style may be set globally using the capital(default _pagination _class) and capital(page _size) settings key
+
+
+REST_FRAMEWORK ={
+    'DEFAULT_PAGINATION_CLASS' : "rest_framework.pagination.PageNumberPagination",
+    'PAGE_SIZE' : 5 # tell only five object see it . 
+},
+
+
+
+
+--------------------------in locally ------------------------
+
+You can set the Pagination  Class on an individual view by using pagination _clas attributee.
+
+class StudentApi(ListApiView):
+     queryset = object.all()
+     serializer_class = studentserializer 
+     pagination_class = PageNumberPagination
+     
+
+     page size we see later first see what is page number pagination.
+
+
+     these paginations style expect a single number page number in the request query parameter.
+
+
+-- The page number pagination class include a number of attributes that may be override to modify the vagination style.
+
+--to set these attributes you should override the page number pagination class and then enable your custom pagination class.
+
+
+---------django_paginator_class - the Django Pagiantion class to Use : default is dajgno.core.paginator.Paginator , which should be fine for most use cases . 
+
+page-size - A In numeric value integrate da Page size if set the this override the page_size settings default to the same value as the page _size setting key
+
+page_query_param - "P"  - A string value indicated that the name of the query parameter to the four the paginator control . ex page=3 - ew chage page to p  d what we want we do it .
+
+Page_size_qquery_param - 'reocrds'   - (by this record name ) ( it gave user power to get per page as they want . )If set this is a string value indicate the name of a query parameter that allows the client to set the page size on a per request basis default to none indicate that the client may not control the requestpages _size
+it call like : studentapi/?page=3&record=10 - mean in page 3 get 10 record .
+
+
+max_page_size - 7 -  ( if you gave user to power to get data in a page as they want but if user abuse it to slow your site so we linit it . ) if set this is numeric value indicate that maximum allowable request page size the tribute is only valid if page size query perms is also set.
+
+last_page_strings-  'end' -----a list of Tuple of string value indicate value that may be used with the page _query _params to request the final page in the set defaults to last.
+
+when yiu call : - api/p=last - so if you want to change last to end the use it . 
+
+
+
+
+
+django said if you want any other attribute so first make a sub class get the attribute and give you rclass name to pagination_class. 
+
+
+in practicall override pagination class to custom class : - 
+
+
+
+class CustomPAgination(PageNumberPagination):
+    page_size = 5 
+    page_size_query_parm = "records"
+    max_page_size = 7 
+
+
+class StudetnapiView(listView):
+    query = object.alll()
+    serializer_class = serializer_class
+    pagination_class = get you own class / CustomPAgination . 
+
+
+

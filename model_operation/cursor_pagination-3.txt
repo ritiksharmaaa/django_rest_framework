@@ -1,0 +1,41 @@
+# cursor pagination : - 
+
+The cursor based pagination present an oppaue cursor indicate that the client may use to page through the results at these pagination style only present forward and reverse control and does not allow the client to navigate to arbitrary position.
+
+mean here you only do next or privious . 
+
+Cursor based designation requires that there is a unique unchanging ordering of item in the result set these ordering might typically be creation time stamp on the record as they present a consistent ordering to paginate against.
+
+The default is to order by created this assumed that there must be a created time stamp field on the model instance and will present a timeline style paginated view with the most recently added item first.
+
+
+--------------
+
+the cursor pagination class includes a number of attributes that may be overridden to modify the paging little style.
+
+to set these attributes should override the cursor pagination class and then enable your custom page initial class.
+
+1 - page_size = An American value indicating the page size is set the overridens the page _size setting default to the same value as the page _size setting key.
+
+2 - Cursor _query _peram2 a string value indicating the name of the cursor query parameter defaults to Cursor
+
+3 = ordering - This should be a string or list of string indicating the field against which the cursor based presentation will be applied for example ordering to slug defaults to - created this value may also be overwritten by using ordering filter on the view.
+
+Default : - Two - created this value may also be overwritten by using ordering filter on the view.
+
+
+template : - The name of the temperament to use when rendering paginated control in the browsable api baby overridden to modify the rendering style or set to none to disable stml paging nation control completely default to rest _framework slash pagination previous _next.html.
+
+
+
+you have to create a model for this person name is created whivh store timeslap . ------------------
+
+
+class mycirsor pagination(CursorPagination):
+    page_size = 3
+    #fir counter creted error give this 
+    ordering = "name "
+    cursor_query_param = "cu"
+
+
+
